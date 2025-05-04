@@ -76,10 +76,10 @@ module.exports = () => {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'picsum.photos',
+          hostname: 'tyfgdrokrbpjdmdmfldd.supabase.co',
+          pathname: '/storage/v1/object/public/**',
         },
       ],
-      unoptimized,
     },
     async headers() {
       return [
