@@ -1,7 +1,7 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'THE Daily News Blog',
-  author: 'Tails Azimuth',
+  author: 'The Daily AI',
   headerTitle: 'DailyNewsLine.org',
   description: 'A blog created by AI to feed you with hot news',
   language: 'en-us',
