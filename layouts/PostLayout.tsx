@@ -61,7 +61,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                     alt={title}
                     width={800}
                     height={400}
-                    className="rounded-lg object-cover w-full"
+                    className="w-full rounded-lg object-cover"
                   />
                 </div>
               )}
