@@ -30,7 +30,7 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, images } = content
+  const { filePath, path, slug, date, title, tags } = content
   const basePath = path.split('/')[0]
 
   return (
@@ -53,18 +53,6 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <div>
                 <PageTitle>{title}</PageTitle>
               </div>
-              {/* Image principale de l'article */}
-              {images && images.length > 0 && (
-                <div className="mt-8 mb-8">
-                  <Image
-                    src={images[0]}
-                    alt={title}
-                    width={800}
-                    height={400}
-                    className="rounded-lg object-cover w-full"
-                  />
-                </div>
-              )}
             </div>
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 dark:divide-gray-700">
