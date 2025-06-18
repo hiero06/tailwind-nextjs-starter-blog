@@ -6,7 +6,6 @@ import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
@@ -108,7 +107,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </SectionContainer>
         </ThemeProviders>
         <VercelAnalytics />
-        <SpeedInsights />
       </body>
     </html>
   )
