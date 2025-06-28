@@ -10,15 +10,15 @@ import { Metadata } from 'next'
 const POSTS_PER_PAGE = 5
 
 // ✅ Mise à jour pour Next.js 15 - params est maintenant une Promise
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: Promise<{ category: string }> 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>
 }): Promise<Metadata> {
   // ✅ Attendre la résolution des params
   const { category } = await params
   const rawCategory = decodeURIComponent(category)
-  
+
   return genPageMetadata({
     title: rawCategory,
     description: `${siteMetadata.title} ${rawCategory} categorized content`,
@@ -39,20 +39,14 @@ export const generateStaticParams = async () => {
 }
 
 // ✅ Mise à jour pour Next.js 15 - params est maintenant une Promise
-export default async function CategoryPage({ 
-  params 
-}: { 
-  params: Promise<{ category: string }> 
-}) {
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   // ✅ Attendre la résolution des params
   const { category } = await params
   const rawCategory = decodeURIComponent(category)
   const categorySlug = slug(rawCategory)
 
   const filteredPosts = allCoreContent(
-    sortPosts(
-      allBlogs.filter((post) => slug(post.category ?? 'uncategorized') === categorySlug)
-    )
+    sortPosts(allBlogs.filter((post) => slug(post.category ?? 'uncategorized') === categorySlug))
   )
 
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)

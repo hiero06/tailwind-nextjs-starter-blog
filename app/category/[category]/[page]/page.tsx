@@ -28,17 +28,13 @@ export default async function CategoryPage({
 }) {
   // ✅ Attendre la résolution des params
   const { category, page } = await params
-  
+
   const rawCategory = decodeURIComponent(category)
   const categorySlug = slug(rawCategory)
   const pageNumber = parseInt(page, 10)
 
   const filteredPosts = allCoreContent(
-    sortPosts(
-      allBlogs.filter(
-        (post) => slug(post.category ?? 'uncategorized') === categorySlug
-      )
-    )
+    sortPosts(allBlogs.filter((post) => slug(post.category ?? 'uncategorized') === categorySlug))
   )
 
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)

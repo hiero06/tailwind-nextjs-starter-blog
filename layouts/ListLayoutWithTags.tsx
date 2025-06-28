@@ -95,7 +95,7 @@ export default function ListLayoutWithTags({
         </div>
         <div className="flex sm:space-x-24">
           <div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-sm bg-gray-50 pt-5 shadow-md sm:flex dark:bg-gray-900/70 dark:shadow-gray-800/40">
-            <div className="px-6 py-4 space-y-6">
+            <div className="space-y-6 px-6 py-4">
               <div>
                 <Link
                   href="/blog"
@@ -107,7 +107,7 @@ export default function ListLayoutWithTags({
 
               {/* Categories */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white uppercase">
+                <h3 className="text-lg font-semibold text-gray-900 uppercase dark:text-white">
                   Categories
                 </h3>
                 <ul>
@@ -135,7 +135,7 @@ export default function ListLayoutWithTags({
 
               {/* Tags */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white uppercase">
+                <h3 className="text-lg font-semibold text-gray-900 uppercase dark:text-white">
                   Tags
                 </h3>
                 <ul>

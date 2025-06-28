@@ -5,11 +5,13 @@ import categoryData from 'app/category-data.json'
 import { genPageMetadata } from 'app/seo'
 import { allBlogs } from 'contentlayer/generated'
 
-console.log(allBlogs.map((post) => ({
-  title: post.title,
-  category: post.category,
-  tags: post.tags,
-})))
+console.log(
+  allBlogs.map((post) => ({
+    title: post.title,
+    category: post.category,
+    tags: post.tags,
+  }))
+)
 export const metadata = genPageMetadata({
   title: 'Categories',
   description: 'Browse blog categories',
