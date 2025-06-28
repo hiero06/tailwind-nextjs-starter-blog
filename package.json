@@ -9,7 +9,9 @@
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate:categories": "ts-node scripts/generate-category-data.ts",
+    "generate:tags": "ts-node scripts/generate-tag-data.ts"
   },
   "dependencies": {
     "@headlessui/react": "2.2.0",
@@ -67,8 +69,7 @@
     "lint-staged": "^13.0.0",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.1.3"
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx)": [
