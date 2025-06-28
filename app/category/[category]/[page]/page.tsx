@@ -7,7 +7,8 @@ import { notFound } from 'next/navigation'
 
 const POSTS_PER_PAGE = 5
 
-export const generateStaticParams = async () => {
+// ✅ PAS async ici, Next.js ne l'aime pas si non nécessaire
+export function generateStaticParams() {
   const categoryCounts = categoryData as Record<string, number>
   return Object.keys(categoryCounts).flatMap((category) => {
     const postCount = categoryCounts[category]
@@ -19,7 +20,7 @@ export const generateStaticParams = async () => {
   })
 }
 
-// ✅ Utilisation directe du type inline (alternative propre à `interface Props`)
+// ✅ Ce composant peut rester async, c’est OK
 export default async function CategoryPage({
   params,
 }: {
