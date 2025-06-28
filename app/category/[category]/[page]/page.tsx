@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 
 const POSTS_PER_PAGE = 5
 
-// ✅ PAS async ici, Next.js ne l'aime pas si non nécessaire
+// ✅ Générer les paramètres statiques
 export function generateStaticParams() {
   const categoryCounts = categoryData as Record<string, number>
   return Object.keys(categoryCounts).flatMap((category) => {
@@ -20,15 +20,18 @@ export function generateStaticParams() {
   })
 }
 
-// ✅ Ce composant peut rester async, c’est OK
+// ✅ Mise à jour pour Next.js 15 - params est maintenant une Promise
 export default async function CategoryPage({
   params,
 }: {
-  params: { category: string; page: string }
+  params: Promise<{ category: string; page: string }>
 }) {
-  const rawCategory = decodeURIComponent(params.category)
+  // ✅ Attendre la résolution des params
+  const { category, page } = await params
+  
+  const rawCategory = decodeURIComponent(category)
   const categorySlug = slug(rawCategory)
-  const pageNumber = parseInt(params.page, 10)
+  const pageNumber = parseInt(page, 10)
 
   const filteredPosts = allCoreContent(
     sortPosts(
