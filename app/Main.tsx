@@ -46,7 +46,7 @@ export default function Home({ posts }) {
                           {category && ( // Only display if a category exists
                             <Link
                               href={`/categories/${slug(category)}`}
-                              className="text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-sm font-medium uppercase"
                               aria-label={`View posts in category ${category}`}
                             >
                               {category}

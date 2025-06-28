@@ -29,9 +29,7 @@ export default async function CategoryPage(props: {
 
   const filteredPosts = allCoreContent(
     sortPosts(
-      allBlogs.filter(
-        (post) => post.tags && post.tags.map((t) => slug(t)).includes(category)
-      )
+      allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(category))
     )
   )
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)

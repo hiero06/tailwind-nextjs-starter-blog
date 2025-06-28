@@ -145,16 +145,16 @@ export default function ListLayoutWithTags({
                               {title}
                             </Link>
                           </h2>
-                        {/* MODIFICATION HERE: Replace tags map with category link */}
-                        {category && (
-                          <Link
-                            href={`/categories/${slug(category)}`}
-                            className="text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            aria-label={`View posts in category ${category}`}
-                          >
-                            {category}
-                          </Link>
-                        )}
+                          {/* MODIFICATION HERE: Replace tags map with category link */}
+                          {category && (
+                            <Link
+                              href={`/categories/${slug(category)}`}
+                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-sm font-medium uppercase"
+                              aria-label={`View posts in category ${category}`}
+                            >
+                              {category}
+                            </Link>
+                          )}
                         </div>
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
