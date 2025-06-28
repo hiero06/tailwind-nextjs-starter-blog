@@ -19,6 +19,7 @@ export const generateStaticParams = async () => {
   })
 }
 
+// ✅ Utilisation directe du type inline (alternative propre à `interface Props`)
 export default async function CategoryPage({
   params,
 }: {
