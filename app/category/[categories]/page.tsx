@@ -37,10 +37,18 @@ export const generateStaticParams = async () => {
 export default async function CategoryPage(props: { params: Promise<{ category: string }> }) {
   const params = await props.params
   const category = decodeURI(params.category)
+
   const title = category[0].toUpperCase() + category.split(' ').join('-').slice(1)
+
   const filteredPosts = allCoreContent(
-    sortPosts(allBlogs.filter((post) => post.category && slug(post.category) === category))
+    sortPosts(
+      allBlogs.filter((post) => {
+        const postCategorySlug = post.category ? slug(post.category) : 'undefined'
+        return postCategorySlug === category
+      })
+    )
   )
+
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
   const initialDisplayPosts = filteredPosts.slice(0, POSTS_PER_PAGE)
   const pagination = {
@@ -57,3 +65,4 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
     />
   )
 }
+
