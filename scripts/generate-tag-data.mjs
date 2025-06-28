@@ -13,9 +13,6 @@ allBlogs.forEach((post) => {
   })
 })
 
-fs.writeFileSync(
-  path.join(process.cwd(), 'app/tag-data.json'),
-  JSON.stringify(tagCounts, null, 2)
-)
+fs.writeFileSync(path.join(process.cwd(), 'app/tag-data.json'), JSON.stringify(tagCounts, null, 2))
 
 console.log('✅ tag-data.json generated.')

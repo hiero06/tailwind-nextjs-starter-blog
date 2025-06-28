@@ -12,7 +12,7 @@
     "prepare": "husky",
     "generate:categories": "node scripts/generate-category-data.mjs",
     "generate:tags": "node scripts/generate-tag-data.mjs"
-    },
+  },
   "dependencies": {
     "@headlessui/react": "2.2.0",
     "@next/bundle-analyzer": "15.2.4",
