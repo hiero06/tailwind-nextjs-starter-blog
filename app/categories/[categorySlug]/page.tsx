@@ -13,22 +13,26 @@ export async function generateStaticParams() {
 
   // For each category, determine total pages needed for pagination
   const categoryPaths = Array.from(categories).flatMap((category) => {
-    const categorySlug = slug(category as string);
+    const categorySlug = slug(category as string)
     const postsInCategory = allBlogs.filter(
       (post) => post.category && slug(post.category) === categorySlug
-    );
-    const totalPages = Math.ceil(postsInCategory.length / POSTS_PER_PAGE);
+    )
+    const totalPages = Math.ceil(postsInCategory.length / POSTS_PER_PAGE)
 
     return Array.from({ length: totalPages }, (_, i) => ({
       categorySlug: categorySlug,
       page: (i + 1).toString(),
-    }));
-  });
+    }))
+  })
 
-  return categoryPaths;
+  return categoryPaths
 }
 
-export default async function CategoryPage({ params }: { params: { categorySlug: string; page: string } }) {
+export default async function CategoryPage({
+  params,
+}: {
+  params: { categorySlug: string; page: string }
+}) {
   const decodedCategory = decodeURI(params.categorySlug)
   const pageNumber = parseInt(params.page)
 
