@@ -13,25 +13,29 @@ export const generateStaticParams = async () => {
     const postCount = categoryCounts[category]
     const totalPages = Math.max(1, Math.ceil(postCount / POSTS_PER_PAGE))
     return Array.from({ length: totalPages }, (_, i) => ({
-      category: encodeURI(category),
+      category: encodeURIComponent(category),
       page: (i + 1).toString(),
     }))
   })
 }
 
-export default async function CategoryPage(props: {
-  params: Promise<{ category: string; page: string }>
+export default async function CategoryPage({
+  params,
+}: {
+  params: { category: string; page: string }
 }) {
-  const params = await props.params
-  const category = decodeURI(params.category)
-  const title = category[0].toUpperCase() + category.split(' ').join('-').slice(1)
-  const pageNumber = parseInt(params.page)
+  const rawCategory = decodeURIComponent(params.category)
+  const categorySlug = slug(rawCategory)
+  const pageNumber = parseInt(params.page, 10)
 
   const filteredPosts = allCoreContent(
     sortPosts(
-      allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(category))
+      allBlogs.filter(
+        (post) => slug(post.category ?? 'uncategorized') === categorySlug
+      )
     )
   )
+
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
 
   if (pageNumber <= 0 || pageNumber > totalPages || isNaN(pageNumber)) {
@@ -45,8 +49,10 @@ export default async function CategoryPage(props: {
 
   const pagination = {
     currentPage: pageNumber,
-    totalPages: totalPages,
+    totalPages,
   }
+
+  const title = `Category: ${rawCategory}`
 
   return (
     <ListLayout

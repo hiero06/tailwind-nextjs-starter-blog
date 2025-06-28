@@ -9,18 +9,15 @@ import { Metadata } from 'next'
 
 const POSTS_PER_PAGE = 5
 
-export async function generateMetadata(props: {
-  params: Promise<{ category: string }>
-}): Promise<Metadata> {
-  const params = await props.params
-  const category = decodeURI(params.category)
+export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
+  const rawCategory = decodeURIComponent(params.category)
   return genPageMetadata({
-    title: category,
-    description: `${siteMetadata.title} ${category} categorized content`,
+    title: rawCategory,
+    description: `${siteMetadata.title} ${rawCategory} categorized content`,
     alternates: {
       canonical: './',
       types: {
-        'application/rss+xml': `${siteMetadata.siteUrl}/categories/${category}/feed.xml`,
+        'application/rss+xml': `${siteMetadata.siteUrl}/categories/${rawCategory}/feed.xml`,
       },
     },
   })
@@ -28,33 +25,30 @@ export async function generateMetadata(props: {
 
 export const generateStaticParams = async () => {
   const categoryCounts = categoryData as Record<string, number>
-  const categoryKeys = Object.keys(categoryCounts)
-  return categoryKeys.map((category) => ({
+  return Object.keys(categoryCounts).map((category) => ({
     category: encodeURI(category),
   }))
 }
 
-export default async function CategoryPage(props: { params: Promise<{ category: string }> }) {
-  const params = await props.params
-  const category = decodeURI(params.category)
-
-  const title = category[0].toUpperCase() + category.split(' ').join('-').slice(1)
+export default async function CategoryPage({ params }: { params: { category: string } }) {
+  const rawCategory = decodeURIComponent(params.category)
+  const categorySlug = slug(rawCategory)
 
   const filteredPosts = allCoreContent(
     sortPosts(
-      allBlogs.filter((post) => {
-        const postCategorySlug = post.category ? slug(post.category) : 'undefined'
-        return postCategorySlug === category
-      })
+      allBlogs.filter((post) => slug(post.category ?? 'uncategorized') === categorySlug)
     )
   )
 
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
   const initialDisplayPosts = filteredPosts.slice(0, POSTS_PER_PAGE)
+
   const pagination = {
     currentPage: 1,
-    totalPages: totalPages,
+    totalPages,
   }
+
+  const title = `Category: ${rawCategory}`
 
   return (
     <ListLayout
