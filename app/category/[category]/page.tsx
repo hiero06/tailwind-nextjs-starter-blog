@@ -9,8 +9,16 @@ import { Metadata } from 'next'
 
 const POSTS_PER_PAGE = 5
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const rawCategory = decodeURIComponent(params.category)
+// ✅ Mise à jour pour Next.js 15 - params est maintenant une Promise
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ category: string }> 
+}): Promise<Metadata> {
+  // ✅ Attendre la résolution des params
+  const { category } = await params
+  const rawCategory = decodeURIComponent(category)
+  
   return genPageMetadata({
     title: rawCategory,
     description: `${siteMetadata.title} ${rawCategory} categorized content`,
@@ -30,8 +38,15 @@ export const generateStaticParams = async () => {
   }))
 }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-  const rawCategory = decodeURIComponent(params.category)
+// ✅ Mise à jour pour Next.js 15 - params est maintenant une Promise
+export default async function CategoryPage({ 
+  params 
+}: { 
+  params: Promise<{ category: string }> 
+}) {
+  // ✅ Attendre la résolution des params
+  const { category } = await params
+  const rawCategory = decodeURIComponent(category)
   const categorySlug = slug(rawCategory)
 
   const filteredPosts = allCoreContent(
