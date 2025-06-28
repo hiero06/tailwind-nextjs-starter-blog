@@ -43,7 +43,7 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
   const filteredPosts = allCoreContent(
     sortPosts(
       allBlogs.filter((post) => {
-        const postCategorySlug = post.category ? slug(post.category) : 'undefined'
+        const postCategorySlug = post.categories ? slug(post.categories) : 'undefined'
         return postCategorySlug === category
       })
     )
