@@ -48,7 +48,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         const postCategory = post.category
         if (Array.isArray(postCategory)) {
           // Si category est un tableau, vérifier chaque élément
-          return postCategory.some(cat => slug(cat) === categorySlug)
+          return postCategory.some((cat) => slug(cat) === categorySlug)
         } else {
           // Si category est une string (ou undefined)
           return slug(postCategory ?? 'uncategorized') === categorySlug

@@ -34,21 +34,21 @@ export async function generateMetadata({
 export const generateStaticParams = async () => {
   const categoryCounts = categoryData as Record<string, number>
   const categoryKeys = Object.keys(categoryCounts)
-  
+
   const paths: { category: string; page: string }[] = []
-  
+
   categoryKeys.forEach((category) => {
     const filteredPosts = allBlogs.filter((post) => {
       const postCategory = post.category
       if (Array.isArray(postCategory)) {
-        return postCategory.some(cat => slug(cat) === slug(category))
+        return postCategory.some((cat) => slug(cat) === slug(category))
       } else {
         return slug(postCategory ?? 'uncategorized') === slug(category)
       }
     })
-    
+
     const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
-    
+
     for (let i = 1; i <= totalPages; i++) {
       paths.push({
         category: encodeURI(category),
@@ -56,14 +56,14 @@ export const generateStaticParams = async () => {
       })
     }
   })
-  
+
   return paths
 }
 
-export default async function CategoryPagePaginated({ 
-  params 
-}: { 
-  params: Promise<{ category: string; page: string }> 
+export default async function CategoryPagePaginated({
+  params,
+}: {
+  params: Promise<{ category: string; page: string }>
 }) {
   const { category, page } = await params
   const rawCategory = decodeURIComponent(category)
@@ -77,7 +77,7 @@ export default async function CategoryPagePaginated({
         const postCategory = post.category
         if (Array.isArray(postCategory)) {
           // Si category est un tableau, vérifier chaque élément
-          return postCategory.some(cat => slug(cat) === categorySlug)
+          return postCategory.some((cat) => slug(cat) === categorySlug)
         } else {
           // Si category est une string (ou undefined)
           return slug(postCategory ?? 'uncategorized') === categorySlug

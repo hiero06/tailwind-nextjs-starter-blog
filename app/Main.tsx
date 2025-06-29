@@ -44,7 +44,8 @@ export default function Home({ posts }) {
                               {title}
                             </Link>
                           </h2>
-                          {category && <Category category={category} />} {/* Use Category component */}
+                          {category && <Category category={category} />}{' '}
+                          {/* Use Category component */}
                         </div>
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
