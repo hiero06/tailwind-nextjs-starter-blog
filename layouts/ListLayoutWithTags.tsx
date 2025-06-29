@@ -187,7 +187,7 @@ export default function ListLayoutWithTags({
                           </h2>
                           {category && (
                             <Link
-                              href={`/category/${slug(category)}`}
+                              href={`/category/${slug(Array.isArray(category) ? category[0] : category)}`}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-sm font-medium uppercase"
                             >
                               {category}
