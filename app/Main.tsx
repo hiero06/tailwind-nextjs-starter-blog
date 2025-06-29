@@ -4,7 +4,7 @@ import Category from '@/components/Category'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
-//import { slug } from 'github-slugger'
+import { slug } from 'github-slugger'
 const MAX_DISPLAY = 5
 
 export default function Home({ posts }) {
