@@ -1,5 +1,5 @@
 import Link from '@/components/Link'
-import Tag from '@/components/Tag' // Remplace par `Category` si tu préfères créer un composant dédié
+import Tag from '@/components/Category' // Remplace par `Category` si tu préfères créer un composant dédié
 import { slug } from 'github-slugger'
 import categoryData from 'app/category-data.json'
 import { genPageMetadata } from 'app/seo'
