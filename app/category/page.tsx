@@ -1,5 +1,5 @@
 import Link from '@/components/Link'
-import Tag from '@/components/Category' // Remplace par `Category` si tu préfères créer un composant dédié
+import Category from '@/components/Category' // ✅ Correction: utiliser Category
 import { slug } from 'github-slugger'
 import categoryData from 'app/category-data.json'
 import { genPageMetadata } from 'app/seo'
@@ -12,6 +12,7 @@ console.log(
     tags: post.tags,
   }))
 )
+
 export const metadata = genPageMetadata({
   title: 'Categories',
   description: 'Browse blog categories',
@@ -34,9 +35,9 @@ export default async function Page() {
         {sortedCategories.map((category) => {
           return (
             <div key={category} className="mt-2 mr-5 mb-2">
-              <Tag text={category} />
+              <Category category={category} />
               <Link
-                href={`/categories/${slug(category)}`}
+                href={`/category/${slug(category)}`} // ✅ Correction: /category pour correspondre à votre structure
                 className="-ml-2 text-sm font-semibold text-gray-600 uppercase dark:text-gray-300"
                 aria-label={`View posts categorized as ${category}`}
               >

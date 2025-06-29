@@ -1,10 +1,10 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
-import Category from '@/components/Category'
+import Category from '@/components/Category' // Ensure this is used
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
-import { slug } from 'github-slugger'
+
 const MAX_DISPLAY = 5
 
 export default function Home({ posts }) {
@@ -22,9 +22,9 @@ export default function Home({ posts }) {
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags, category } = post
+            const { slug: postSlug, date, title, summary, tags, category } = post
             return (
-              <li key={slug} className="py-12">
+              <li key={postSlug} className="py-12">
                 <article>
                   <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                     <dl>
@@ -38,21 +38,13 @@ export default function Home({ posts }) {
                         <div>
                           <h2 className="text-2xl leading-8 font-bold tracking-tight">
                             <Link
-                              href={`/blog/${slug}`}
+                              href={`/blog/${postSlug}`}
                               className="text-gray-900 dark:text-gray-100"
                             >
                               {title}
                             </Link>
                           </h2>
-                          {category && ( // Only display if a category exists
-                            <Link
-                              href={`/categories/${slug(category)}`}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-sm font-medium uppercase"
-                              aria-label={`View posts in category ${category}`}
-                            >
-                              {category}
-                            </Link>
-                          )}
+                          {category && <Category category={category} />} {/* Use Category component */}
                         </div>
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
@@ -60,11 +52,11 @@ export default function Home({ posts }) {
                       </div>
                       <div className="text-base leading-6 font-medium">
                         <Link
-                          href={`/blog/${slug}`}
+                          href={`/blog/${postSlug}`}
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read more: "${title}"`}
                         >
-                          Read more &rarr;
+                          Read more →
                         </Link>
                       </div>
                     </div>
@@ -82,7 +74,7 @@ export default function Home({ posts }) {
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             aria-label="All posts"
           >
-            All Posts &rarr;
+            All Posts →
           </Link>
         </div>
       )}

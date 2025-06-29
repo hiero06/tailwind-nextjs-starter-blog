@@ -1,21 +1,15 @@
 import Link from 'next/link'
 import { slug } from 'github-slugger'
 
-interface Props {
-  text: string
-}
-
-const Category = ({ text }: Props) => {
+export default function Category({ category }) {
+  if (!category || typeof category !== 'string') return null
   return (
     <Link
-      href={`/categories/${slug(text)}`}
-      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
+      href={`/category/${slug(category)}`}
+      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-sm font-medium uppercase"
+      aria-label={`View posts in category ${category}`}
     >
-      {text}
+      {category}
     </Link>
   )
 }
-
-export default Category
-
-
