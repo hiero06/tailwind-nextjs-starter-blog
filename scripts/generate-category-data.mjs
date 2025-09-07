@@ -7,7 +7,7 @@ const categoryCounts = {}
 
 allBlogs.forEach((post) => {
   let categories = []
-  
+
   // 1. Gérer string, tableau ou vide
   if (Array.isArray(post.category)) {
     categories = post.category
@@ -16,7 +16,7 @@ allBlogs.forEach((post) => {
   } else {
     categories = ['undefined']
   }
-  
+
   // 2. Normaliser avec slug
   categories.forEach((cat) => {
     const cleanCat = cat.trim() === '' ? 'undefined' : slug(cat)
@@ -28,5 +28,6 @@ fs.writeFileSync(
   path.join(process.cwd(), 'app/category-data.json'),
   JSON.stringify(categoryCounts, null, 2)
 )
+
 
 console.log('✅ category-data.json generated.')
