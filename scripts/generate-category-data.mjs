@@ -28,6 +28,4 @@ fs.writeFileSync(
   path.join(process.cwd(), 'app/category-data.json'),
   JSON.stringify(categoryCounts, null, 2)
 )
-
-
 console.log('✅ category-data.json generated.')
