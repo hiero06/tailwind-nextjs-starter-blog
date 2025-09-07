@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'A blog created by AI to feed you with hot news',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://www.dailynewsline.org/',
+  siteUrl: 'https://www.dailynewsline.org',
   siteRepo: 'https://github.com/hiero06/tailwind-nextjs-starter-blog',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
