@@ -6,8 +6,22 @@ import { slug } from 'github-slugger'
 const categoryCounts = {}
 
 allBlogs.forEach((post) => {
-  const category = post.category ? slug(post.category) : 'undefined'
-  categoryCounts[category] = (categoryCounts[category] || 0) + 1
+  let categories = []
+  
+  // 1. Gérer string, tableau ou vide
+  if (Array.isArray(post.category)) {
+    categories = post.category
+  } else if (typeof post.category === 'string' && post.category.trim() !== '') {
+    categories = [post.category]
+  } else {
+    categories = ['undefined']
+  }
+  
+  // 2. Normaliser avec slug
+  categories.forEach((cat) => {
+    const cleanCat = cat.trim() === '' ? 'undefined' : slug(cat)
+    categoryCounts[cleanCat] = (categoryCounts[cleanCat] || 0) + 1
+  })
 })
 
 fs.writeFileSync(
